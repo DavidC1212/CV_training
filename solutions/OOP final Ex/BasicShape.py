@@ -24,6 +24,7 @@ class BasicShape(Shape):
         """
 
         :param points: given points
+        # CR: triangle?
         :return: None, sets the points to the triangle points
         """
         pass

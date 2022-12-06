@@ -49,6 +49,8 @@ class CompositeShape(Shape):
             self.children.append(new_shape)
         else:
             child_properties = list(shape.values())[0]
+            # CR: seems a bit messy and duplicated code. Refer to this link, it explains how to instantiate a class
+            # from string (assuming they have the same name).
             if name == 'triangle':
                 self.children.append(Triangle(p1=Point(child_properties[0][0]),
                                               p2=Point(child_properties[0][1]),

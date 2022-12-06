@@ -14,10 +14,14 @@ class Rectangle(BasicShape):
         :param bottom_right_pt: bottom right point of the rectangle
         """
         super().__init__(fill_color, line_color, rotate_angle, translation, scale_size)
+        # CR: Notice that all shapes have points. Point and Circle have 1 point, Line has 2, Triangle has 3 and
+        # Rectangle has 4. Try to think of a way to generalize this so you don't access each point individually
+        # when you come to rotate, resize and translate.s
         self.p0 = top_left_pt
         self.p1 = Point((top_left_pt.x, bottom_right_pt.y))
         self.p2 = bottom_right_pt
         self.p3 = Point((bottom_right_pt.x, top_left_pt.y))
+        # CR: line_color is initialized at BasicShape, why do it again here?
         self.line_color = line_color
         self.fill_color = fill_color
 
@@ -28,6 +32,8 @@ class Rectangle(BasicShape):
         else:
             cv2.drawContours(img, [points], 0, color=self.line_color)
 
+    # CR: Duplicated code. resize should basically be the same for all shapes by resizing its points around the center.
+    # Try to think of a way to eliminate this duplication.
     def resize(self, center, scale_size):
         points = np.array([(self.p0.getPoint()), (self.p1.getPoint()), (self.p2.getPoint()), (self.p3.getPoint())])
         c_x, c_y = center
@@ -39,6 +45,8 @@ class Rectangle(BasicShape):
 
         self.setPoints(new_points)
 
+    # CR: Duplicated code. rotate should basically be the same for all shapes by rotating its points around the center.
+    # Try to think of a way to eliminate this duplication.
     def rotate(self, center, angle):
         angle = np.deg2rad(angle)
         points = [self.p0.getPoint(), self.p1.getPoint(), self.p2.getPoint(), self.p3.getPoint()]
@@ -50,6 +58,9 @@ class Rectangle(BasicShape):
 
         self.setPoints(new_points)
 
+    # CR: Duplicated code. the same logic is done in other shapes (i.e. Triangle, but on 3 points instead of 4).
+    # convertPointsToCenter (translation) should basically be the same for all shapes but on different amount of points.
+    # Try to think of a way to eliminate this duplication.
     def convertPointsToCenter(self):
         points = [self.p0.getPoint(), self.p1.getPoint(), self.p2.getPoint(), self.p3.getPoint()]
 
