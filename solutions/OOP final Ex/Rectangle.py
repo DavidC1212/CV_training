@@ -18,50 +18,18 @@ class Rectangle(BasicShape):
         self.p1 = Point((top_left_pt.x, bottom_right_pt.y))
         self.p2 = bottom_right_pt
         self.p3 = Point((bottom_right_pt.x, top_left_pt.y))
-        self.line_color = line_color
-        self.fill_color = fill_color
+        self.points = np.array([(self.p0.getPoint()), (self.p1.getPoint()), (self.p2.getPoint()), (self.p3.getPoint())])
+
 
     def draw(self, img):
-        points = np.array([(self.p0.getPoint()), (self.p1.getPoint()), (self.p2.getPoint()), (self.p3.getPoint())])
         if self.fill_color:
-            cv2.drawContours(img, [points], 0, color=self.line_color, thickness=-1)
+            cv2.drawContours(img, [self.points], 0, color=self.line_color, thickness=-1)
         else:
-            cv2.drawContours(img, [points], 0, color=self.line_color)
-
-    def resize(self, center, scale_size):
-        points = np.array([(self.p0.getPoint()), (self.p1.getPoint()), (self.p2.getPoint()), (self.p3.getPoint())])
-        c_x, c_y = center
-
-        new_points = np.array([[
-                px - int((scale_size - 1) * (c_x - px)),
-                py - int((scale_size - 1) * (c_y - py))
-            ] for px, py in points]).astype(int)
-
-        self.setPoints(new_points)
-
-    def rotate(self, center, angle):
-        angle = np.deg2rad(angle)
-        points = [self.p0.getPoint(), self.p1.getPoint(), self.p2.getPoint(), self.p3.getPoint()]
-        c_x, c_y = center
-        new_points = np.array([[
-                c_x + np.cos(angle) * (px - c_x) - np.sin(angle) * (py - c_y),
-                c_y + np.sin(angle) * (px - c_x) + np.cos(angle) * (py - c_y)
-            ] for px, py in points]).astype(int)
-
-        self.setPoints(new_points)
-
-    def convertPointsToCenter(self):
-        points = [self.p0.getPoint(), self.p1.getPoint(), self.p2.getPoint(), self.p3.getPoint()]
-
-        new_points = np.array([[
-                px + self.center[0],
-                self.center[1] - py
-            ] for px, py in points]).astype(int)
-
-        self.setPoints(new_points)
+            cv2.drawContours(img, [self.points], 0, color=self.line_color)
 
     def setPoints(self, points):
         self.p0.x, self.p0.y = points[0]
         self.p1.x, self.p1.y = points[1]
         self.p2.x, self.p2.y = points[2]
         self.p3.x, self.p3.y = points[3]
+        self.points = points

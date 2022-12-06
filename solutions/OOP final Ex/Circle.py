@@ -14,9 +14,6 @@ class Circle(BasicShape):
         super().__init__(line_color, fill_color, rotate_angle, translation, scale_size)
         self.center_point = translation
         self.radius = radius
-        self.line_color = line_color
-        self.fill_color = fill_color
-        self.scale_size = scale_size
 
     def draw(self, img):
         if self.fill_color:
@@ -27,5 +24,8 @@ class Circle(BasicShape):
     def resize(self, ceneter, scale_size):
         self.radius *= scale_size
 
-    def rotate(self, center, rotate_angle):
+    def rotate(self, center, angle):
+        pass
+
+    def convertPointsToCenter(self):
         pass

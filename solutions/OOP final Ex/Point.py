@@ -7,7 +7,6 @@ class Point(BasicShape):
         super().__init__(fill_color, line_color, rotate_angle, translation, scale_size)
         self.x = self.translation[0]
         self.y = self.translation[1]
-        self.line_color = line_color
         self.radius = 0
 
     def draw(self, img):
@@ -18,10 +17,13 @@ class Point(BasicShape):
 
         :return: point as a tuple
         """
-        return (self.x, self.y)
+        return self.x, self.y
 
     def rotate(self, center, angle):
         pass
 
     def resize(self, center, scale_size):
         self.radius = scale_size
+
+    def convertPointsToCenter(self):
+        pass

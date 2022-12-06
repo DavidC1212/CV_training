@@ -19,7 +19,7 @@ def convertStringsToTypes(properties):
                 new_properties.append(property == 'True')
             else:
                 new_properties.append(float(property))
-        elif type(property[0]) != dict:
+        elif type(property) != dict:
             if 'json' in property[0]:
                 new_properties.append(json.load(open(property[0])))
             else:
