@@ -1,3 +1,4 @@
+# CR: When defining an abstract class it is advised to use abc library in python
 class Shape:
     def __init__(self, rotate_angle, translation, scale_size):
         self.rotate_angle = rotate_angle

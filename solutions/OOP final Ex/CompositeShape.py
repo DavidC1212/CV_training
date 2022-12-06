@@ -6,6 +6,9 @@ from Rectangle import Rectangle
 from Line import Line
 from utils import convertStringsToTypes
 
+# CR: CompositeShape should not be coupled with the basic shapes and know what they are (what if I were to add another
+# shape?). Refactor the code so that the factory (Creator) is the only class that "knows" the details of Shapes and how
+# to create them.
 SHAPES = ['triangle', 'point', 'circle', 'rectangle', 'line']
 
 
@@ -25,6 +28,9 @@ class CompositeShape(Shape):
         self.children_rotated = False
         self.children_resized = False
 
+    # CR: CompositeShape should interact purely with other shapes (not to know at all that there is a JSON behind the
+    # scenes. Refactor your code in such a way that you need not call convertStringToTypes or construct shapes from
+    # within CompositeShape (Creator should be responsible to all the constructions).
     def add(self, shape):
         """
 
