@@ -6,12 +6,12 @@ import cv2
 
 
 class Circle(BasicShape):
-    def __init__(self, radius: float, line_color, fill_color, rotate_angle, translation, scale_size):
+    def __init__(self, radius: float, line_color, fill_color, rotate_angle, translation, scale_size, center):
         """
 
         :param radius: radius of the circle
         """
-        super().__init__(line_color, fill_color, rotate_angle, translation, scale_size)
+        super().__init__(line_color, fill_color, rotate_angle, translation, scale_size, center)
         self.center_point = translation
         self.radius = radius
 

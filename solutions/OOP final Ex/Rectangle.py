@@ -6,14 +6,14 @@ import cv2
 
 
 class Rectangle(BasicShape):
-    def __init__(self, top_left_pt: Point, bottom_right_pt: Point, line_color: tuple, fill_color: bool, rotate_angle,
-                 translation, scale_size):
+    def __init__(self, top_left_pt: Point, bottom_right_pt: Point, center, line_color: tuple, fill_color: bool,
+                 translation, scale_size, rotate_angle):
         """
 
         :param top_left_pt: top left point of the rectangle
         :param bottom_right_pt: bottom right point of the rectangle
         """
-        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size)
+        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size, center)
         self.p0 = top_left_pt
         self.p1 = Point((top_left_pt.x, bottom_right_pt.y))
         self.p2 = bottom_right_pt

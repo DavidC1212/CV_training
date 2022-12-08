@@ -4,7 +4,7 @@ from Shape import Shape
 
 
 class BasicShape(Shape):
-    def __init__(self, fill_color, line_color, rotate_angle, translation, scale_size):
+    def __init__(self, fill_color, line_color, rotate_angle, translation, scale_size, center):
         """
 
         :param fill_color: boolean if to fill the shape with color
@@ -12,15 +12,12 @@ class BasicShape(Shape):
         :param rotate_angle: the angle to rotate the shape
         :param translation: the translation of the shape in the space of the image
         :param scale_size: the scale size of the shape
+        :param center: the center of the shape
         """
-        super().__init__(rotate_angle, translation, scale_size)
+        super().__init__(rotate_angle, translation, scale_size, center)
         self.points = None
         self.line_color = line_color
         self.fill_color = fill_color
-        self.rotate_angle = rotate_angle
-        self.translation = translation
-        self.scale_size = scale_size
-
 
     def setPoints(self, points):
         """
@@ -61,3 +58,6 @@ class BasicShape(Shape):
             ] for px, py in points]).astype(int)
 
         self.setPoints(new_points)
+
+    def translate(self, center):
+        self.center = center[0] + self.translation[0],  center[1] - self.translation[1]

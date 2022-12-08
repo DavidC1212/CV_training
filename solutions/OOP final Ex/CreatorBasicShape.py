@@ -29,9 +29,9 @@ class CreatorBasicShape(Creator):
         :return: Point with the given instructions
         """
         return Point(line_color=instructions[1], fill_color=instructions[2],
-                     rotate_angle=instructions[3], translation=(center[0],
-                     center[1]),
-                     scale_size=instructions[5])
+                     rotate_angle=instructions[3], translation=(instructions[4][0],
+                     instructions[4][1]),
+                     scale_size=instructions[5], center=center)
 
     def createCircle(self, center, instructions):
         """
@@ -42,9 +42,9 @@ class CreatorBasicShape(Creator):
         """
         return Circle(radius=instructions[1], line_color=instructions[2],
                       fill_color=instructions[3], rotate_angle=instructions[4],
-                      translation=(center[0],
-                                   center[1]),
-                      scale_size=instructions[6])
+                      translation=(instructions[4][0],
+                      instructions[4][1]),
+                      scale_size=instructions[6], center=center)
 
     def createRectangle(self, center, instructions):
         """
@@ -55,9 +55,9 @@ class CreatorBasicShape(Creator):
         """
         return Rectangle(top_left_pt=Point(instructions[0][0]), bottom_right_pt=Point(instructions[0][1]),
                          line_color=instructions[1], fill_color=instructions[2], rotate_angle=instructions[3],
-                         translation=(center[0],
-                                      center[1]),
-                         scale_size=instructions[5])
+                         translation=(instructions[4][0],
+                         instructions[4][1]),
+                         scale_size=instructions[5], center=center)
 
     def createTriangle(self, center, instructions):
         """
@@ -68,9 +68,9 @@ class CreatorBasicShape(Creator):
         """
         return Triangle(p1=Point(instructions[0][0]), p2=Point(instructions[0][1]), p3=Point(instructions[0][2]),
                         line_color=instructions[1], fill_color=instructions[2], rotate_angle=instructions[3],
-                        translation=(center[0],
-                                     center[1]),
-                        scale_size=instructions[5])
+                        translation=(instructions[4][0],
+                        instructions[4][1]),
+                        scale_size=instructions[5], center=center)
 
     def createLine(self, center, instructions):
         """
@@ -81,8 +81,8 @@ class CreatorBasicShape(Creator):
         """
         return Line(p1=Point(instructions[0][0]), p2=Point(instructions[0][0]), line_color=instructions[1],
                     fill_color=instructions[2], rotate_angle=instructions[3],
-                    translation=(center[0],
-                                 center[1]),
-                    scale_size=instructions[5])
+                    translation=(instructions[4][0],
+                    instructions[4][1]),
+                    scale_size=instructions[5], center=center)
 
 

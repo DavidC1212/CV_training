@@ -6,19 +6,19 @@ from Rectangle import Rectangle
 from Line import Line
 from utils import convertStringsToTypes
 
-SHAPES = ['triangle', 'point', 'circle', 'rectangle', 'line']
+
 # CR: CompositeShape should not be coupled with the basic shapes and know what they are (what if I were to add another
 # shape?). Refactor the code so that the factory (Creator) is the only class that "knows" the details of Shapes and how
 # to create them.
 
 class CompositeShape(Shape):
-    def __init__(self, children, name, rotate_angle, translation, scale_size):
+    def __init__(self, children, name, rotate_angle, translation, scale_size, center):
         """
 
         :param children: the sub-shapes of the composite shapes
         :param name: name of the shape, given in the instructions
         """
-        super().__init__(rotate_angle, translation, scale_size)
+        super().__init__(rotate_angle, translation, scale_size, center)
         self.children = children
         self.name = name
         self.rotate_angle = rotate_angle
@@ -65,3 +65,8 @@ class CompositeShape(Shape):
     def convertPointsToCenter(self):
         for child in self.children:
             child.convertPointsToCenter()
+
+    def translate(self, center):
+        self.center = center[0] + self.translation[0], center[1] - self.translation[1]
+        for child in self.children:
+            child.translate(self.center)

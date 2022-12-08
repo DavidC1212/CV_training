@@ -2,6 +2,7 @@ from Creator import Creator
 from utils import convertStringsToTypes
 from CompositeShape import CompositeShape
 from CreatorBasicShape import CreatorBasicShape
+import copy
 
 HEIGHT, WIDTH = 1100, 1100
 SHAPES = ['Triangle', 'Point', 'Circle', 'Rectangle', 'Line']
@@ -17,7 +18,7 @@ class CreateCompositeShape(Creator):
 
     def createParsedShape(self, instructions):
         self._parseJson(instructions)
-        return self.createShape((int(WIDTH / 2), int(HEIGHT / 2)), self.instructions)
+        return self.createShape((int(WIDTH / 2), -int(HEIGHT / 2)), self.instructions)
 
     def createShape(self, center, instructions):
         """
@@ -32,20 +33,40 @@ class CreateCompositeShape(Creator):
 
             if type(properties[1]) != float and type(properties[1]) != tuple:
                 paint = CompositeShape([], name=shape, rotate_angle=0,
-                                       translation=(center[0], center[1]), scale_size=1)
+                                       translation=center, scale_size=1, center=(0,0))
+                children_names = []
                 for child in properties:
-                    paint.add(self.createShape((center[0],
-                                                center[1]), child))
+                    if list(child.keys())[0] in SHAPES:
+                        parsed_child = self.createShape((center[0],
+                                                         center[1]), child)
+                        paint.add(parsed_child)
+                    else:
+                        for idx, parsed_child in enumerate(paint.children):
+                            if list(child.keys())[0] == parsed_child.name:
+                                prt = convertStringsToTypes(list(child.values())[0])
+                                child = copy.deepcopy(parsed_child)
+                                child.rotate_angle = prt[1]
+                                child.translation = prt[2]
+                                child.scale_size = prt[3]
+                                paint.add(child)
+                                break
+
+                        if type(child) != dict:
+                            continue
+                        parsed_child = self.createShape((center[0],
+                                          center[1]), child)
+                        children_names.append(parsed_child.name)
+                        paint.add(parsed_child)
 
                 return paint
 
             elif name not in SHAPES:
                 center = center[0] + properties[2][0], center[1] - properties[2][1]
                 new_shape = CompositeShape([], name=name, rotate_angle=properties[1],
-                                           translation=(center[0],
-                                                        center[1]),
-                                           scale_size=properties[3])
+                                           translation=(properties[2][0], properties[2][1]),
+                                           scale_size=properties[3], center=center)
                 for child_new_shape in list(properties[0].values())[0]:
+                    # if list(child_new_shape.keys())[0] in
                     new_shape.add(self.createShape((center[0],
                                                         center[1]), child_new_shape))
 

@@ -7,14 +7,14 @@ import cv2
 
 class Triangle(BasicShape):
     def __init__(self, p1: Point, p2: Point, p3: Point, line_color: tuple, fill_color: bool, rotate_angle, translation,
-                 scale_size):
+                 scale_size, center):
         """
 
         :param p1: first point of the triangle
         :param p2: second point of the triangle
         :param p3: third point of the triangle
         """
-        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size)
+        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size, center)
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3

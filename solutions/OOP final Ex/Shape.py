@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 
 
 class Shape(ABC):
-    def __init__(self, rotate_angle, translation, scale_size):
+    def __init__(self, rotate_angle, translation, scale_size, center):
         self.rotate_angle = rotate_angle
         self.scale_size = scale_size
         self.translation = translation
-        self.center = self.translation
+        self.center = center
 
     @abstractmethod
     def draw(self, img):
@@ -40,5 +40,13 @@ class Shape(ABC):
         """
 
         :return: None, convert points from instructions to image dimensions
+        """
+        pass
+
+    def translate(self, center):
+        """
+
+        :param center: given center
+        :return: None, translates the cordinates given the center
         """
         pass

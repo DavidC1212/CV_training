@@ -15,6 +15,7 @@ class Painter:
         """
         img = np.zeros((1100, 1100, 3))
         self.parsed_shape = self.creator.createParsedShape(instructions)
+        self.parsed_shape.translate((0,0))
         self.parsed_shape.convertPointsToCenter()
         self.parsed_shape.resize(self.parsed_shape.center, self.parsed_shape.scale_size)
         self.parsed_shape.rotate(self.parsed_shape.center, self.parsed_shape.rotate_angle)
@@ -24,4 +25,4 @@ class Painter:
 
 if __name__ == '__main__':
     p = Painter()
-    p.paintFromJson(instructions='neighbourhood.json')
+    p.paintFromJson(instructions='street.json')

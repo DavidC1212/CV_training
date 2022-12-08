@@ -3,8 +3,8 @@ import numpy as np
 import cv2
 
 class Point(BasicShape):
-    def __init__(self, translation: tuple, rotate_angle=0, scale_size=1, line_color=(0,0,255), fill_color=False):
-        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size)
+    def __init__(self, translation: tuple, center=(0, 0), rotate_angle=0, scale_size=1, line_color=(0,0,255), fill_color=False):
+        super().__init__(fill_color, line_color, rotate_angle, translation, scale_size, center)
         self.x = self.translation[0]
         self.y = self.translation[1]
         self.radius = 0

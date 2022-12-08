@@ -6,13 +6,13 @@ import cv2
 
 
 class Line(BasicShape):
-    def __init__(self, p1: Point, p2: Point,  line_color, rotate_angle, translation, scale_size, fill_color=False):
+    def __init__(self, p1: Point, center, p2: Point,  line_color, rotate_angle, translation, scale_size, fill_color=False):
         """
 
         :param p1: first point of the line
         :param p2: second point of the line
         """
-        super().__init__(fill_color, line_color,  rotate_angle, translation, scale_size)
+        super().__init__(fill_color, line_color,  rotate_angle, translation, scale_size, center)
         self.p1 = p1
         self.p2 = p2
         self.points = np.array([(self.p1.getPoint()), (self.p2.getPoint())])
