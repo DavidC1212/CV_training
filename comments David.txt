@@ -1,0 +1,9 @@
+data science-
+	classification - easy accuracy on iris dataset.
+	missing files from stanford excersice
+
+	pca - need to add reference for face reconstruction in README
+
+	clustering - upload star image
+
+	svm - write use sklearn svm, emplicit...

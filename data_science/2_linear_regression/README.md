@@ -7,7 +7,6 @@
     - What is the advantage of using sequential learning for fitting linear model over the analytical solution?
     - What is the geometrical meaning of the least square solution to linear regression?
     - Why does L1 regularization tend to make coefficients vanish exactly, while L2 doesn’t?
-    - What is the bias-variance tradeoff?
 #### Exercise
  - In the community of the data-scientist there are several known datasets which comprise a benchmark for the community. The data on the neighborhood prices in California is one of them.
  fetch_california_housing
